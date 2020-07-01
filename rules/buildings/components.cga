@@ -28,9 +28,10 @@ Wall(wall_color, wall_tex, dirt_tex) -->
 
 
 # roof		
-Top(wall_color, roof_tex, dirt_tex)  --> 
-	roofGable(16, 1, 0) 
+Top(wall_color, roof_tex, dirt_tex, angle, hangX, hangY)  --> 
+	roofGable(angle, hangX, hangY) 
 	comp(f) { all : Face(wall_color, roof_tex, dirt_tex)}
+
 Face(wall_color, roof_tex, dirt_tex) -->
 	color(wall_color)
     texture(roof_tex)  

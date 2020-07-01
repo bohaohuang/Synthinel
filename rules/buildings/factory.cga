@@ -1,0 +1,31 @@
+/**# imports
+import building_components:			"rules/buildings/components.cga"
+ * File:    factory.cga
+ * Created: 1 Jul 2020 20:33:07 GMT
+ * Author:  Bohao
+ */
+
+version "2019.0"
+
+# imports
+import building_components:			"rules/buildings/components.cga"
+
+# attributes
+attr Building_Height			=	rand(8, 15)
+attr Floor_Height				=	rand(4, 6)
+attr Tile_Width					=	6
+attr Wall_Color					= 	"#f0f0f0"
+attr Wall_Tex					= 	"wall/brickwall.jpg"
+attr Dirt_Tex					=	fileRandom("general/dirtmap/dirtmap_*.jpg")
+attr Roof_Tex					=	"roof/grey_1.jpg"
+attr Roof_Color					= 	"#3D4E64"
+
+# building 
+Warehouse -->
+	extrude(Building_Height) 
+	comp(f){front: building_components.Facade(Floor_Height, Tile_Width, Wall_Color, 
+											  Wall_Tex, Dirt_Tex, Wall_Tex) | 
+			side: building_components.Facade(Floor_Height, Tile_Width, Wall_Color, 
+											  Wall_Tex, Dirt_Tex, Wall_Tex) | 
+			top: building_components.Top(Roof_Color, Roof_Tex, Dirt_Tex, 30, 0, 1)}
+

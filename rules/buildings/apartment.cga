@@ -7,7 +7,7 @@
 version "2019.0"
 
 # imports
-import building_components:			"rules/building_components.cga"
+import building_components:			"rules/buildings/components.cga"
 
 # define attributes
 attr Building_Height			=	rand(40, 70)
@@ -22,13 +22,7 @@ window_tile						=	fileRandom("facade/u_f001_t002_Residential_*.jpg")
 wall_tex						= 	"wall/brickwall.jpg"
 dirt_tex						=	fileRandom("general/dirtmap/dirtmap_*.jpg")
 
-# building
-@StartRule
-Lot -->
-	offset(-2, inside)
-	ChineseApartMent
-	
-			 
+# building 
 ChineseApartMent -->
 	set(window_var, window_tile)
 	set(roof_tex, fileRandom("roof/" + roof_color + "_*.jpg"))
@@ -44,4 +38,4 @@ Building -->
 											  wall_tex, dirt_tex, window_var) | 
 			side: building_components.Facade(Floor_Height, Tile_Width, wallColor, 
 											  wall_tex, dirt_tex, window_var) | 
-			top: building_components.Top(wallColor, roof_tex, dirt_tex)}
+			top: building_components.Top(wallColor, roof_tex, dirt_tex, 15, 1, 0)}

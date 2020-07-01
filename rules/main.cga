@@ -1,0 +1,18 @@
+/**
+ * File:    main.cga
+ * Created: 1 Jul 2020 20:30:06 GMT
+ * Author:  Bohao
+ */
+
+version "2019.0"
+
+# imports
+import apartment:					"rules/buildings/apartment.cga"
+import factory:						"rules/buildings/factory.cga"
+
+@StartRule
+Lot -->
+	offset(-2, inside)
+	# apartment.ChineseApartMent
+	factory.Warehouse
+
