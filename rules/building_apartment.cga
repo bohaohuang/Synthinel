@@ -1,0 +1,47 @@
+/**
+ * File:    building_apartment.cga
+ * Created: 30 Jun 2020 18:16:48 GMT
+ * Author:  Bohao
+ */
+
+version "2019.0"
+
+# imports
+import building_components:			"rules/building_components.cga"
+
+# define attributes
+attr Building_Height			=	rand(40, 70)
+attr Floor_Height 				= 	3.5
+attr Tile_Width					= 	6
+attr wallColor					=  "#f0f0f0"
+attr window_var					=	""
+attr roof_color					=	50%: "blue"	else: "red"
+attr roof_tex					=	""
+# textures
+window_tile						=	fileRandom("facade/u_f001_t002_Residential_*.jpg")
+wall_tex						= 	"wall/brickwall.jpg"
+dirt_tex						=	fileRandom("general/dirtmap/dirtmap_*.jpg")
+
+# building
+@StartRule
+Lot -->
+	offset(-2, inside)
+	ChineseApartMent
+	
+			 
+ChineseApartMent -->
+	set(window_var, window_tile)
+	set(roof_tex, fileRandom("roof/" + roof_color + "_*.jpg"))
+	split(x){'0.33: UBuilding(scope.sx, scope.sz) | 
+			 '0.33: UBuilding(scope.sx, scope.sz) | 
+			 '0.33: UBuilding(scope.sx, scope.sz) } 
+
+UBuilding(width, depth) -->
+	shapeU(depth*0.8, width*0.35, width*0.35){shape: Building | remainder: NIL}
+Building -->
+	extrude(Building_Height) 
+	comp(f){front: building_components.Facade(Floor_Height, Tile_Width, wallColor, 
+											  wall_tex, dirt_tex, window_var) | 
+			side: building_components.Facade(Floor_Height, Tile_Width, wallColor, 
+											  wall_tex, dirt_tex, window_var) | 
+			top: building_components.Top(wallColor, roof_tex, dirt_tex)}

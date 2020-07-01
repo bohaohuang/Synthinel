@@ -1,0 +1,39 @@
+/**
+ * File:    building_components.cga
+ * Created: 1 Jul 2020 17:36:08 GMT
+ * Author:  Bohao
+ */
+
+version "2019.0"
+
+
+# facade
+Facade(height, width, wall_color, wall_tex, dirt_tex, window_tex) -->
+     split(y){{ ~height: Floor(width, wall_color, wall_tex, dirt_tex, window_tex)}* }
+		
+# floor
+Floor(width, wall_color, wall_tex, dirt_tex, window_tex) -->
+    split(x){ 1: Wall(wall_color, wall_tex, dirt_tex) 
+            | { ~width: Window(window_tex) }* 
+            | 1 : Wall(wall_color, wall_tex, dirt_tex) }
+Window(window_tex) --> 
+	setupProjection(0, scope.xy, scope.sx, scope.sy)
+	projectUV(0)
+	texture(window_tex)
+Wall(wall_color, wall_tex, dirt_tex) -->
+    color(wall_color)
+    texture(wall_tex)  
+    set(material.dirtmap, dirt_tex)
+	projectUV(0) projectUV(2)
+
+
+# roof		
+Top(wall_color, roof_tex, dirt_tex)  --> 
+	roofGable(16, 1, 0) 
+	comp(f) { all : Face(wall_color, roof_tex, dirt_tex)}
+Face(wall_color, roof_tex, dirt_tex) -->
+	color(wall_color)
+    texture(roof_tex)  
+    set(material.dirtmap, dirt_tex)
+	projectUV(0) projectUV(2)
+
