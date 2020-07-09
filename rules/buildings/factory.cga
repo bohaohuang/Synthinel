@@ -19,6 +19,13 @@ attr Wall_Tex					= 	"wall/brickwall.jpg"
 attr Dirt_Tex					=	fileRandom("general/dirtmap/dirtmap_*.jpg")
 attr Roof_Tex					=	"roof/grey_1.jpg"
 attr Roof_Color					= 	"#3D4E64"
+getGreenSpaceTexture	= imageBestRatio("/ESRI.lib/assets/Groundcover/Greencopy/green*.jpg","yx")
+
+@StartRule
+Lot -->
+	GreenGround
+	offset(-2, inside)
+	Warehouse
 
 # building 
 Warehouse -->
@@ -29,3 +36,11 @@ Warehouse -->
 											  Wall_Tex, Dirt_Tex, Wall_Tex) | 
 			top: building_components.Top(Roof_Color, Roof_Tex, Dirt_Tex, 30, 0, 1)}
 
+
+
+GreenGround -->
+	alignScopeToGeometry(zUp,0,longest) 
+	setupProjection(0,scope.yx,'1,'1) projectUV(0)
+	texture(getGreenSpaceTexture)
+	setupProjection(2,scope.yx,'1,'1) projectUV(2) 
+	set(material.dirtmap, Dirt_Tex)

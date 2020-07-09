@@ -15,14 +15,40 @@ attr Floor_Height 				= 	3.5
 attr Tile_Width					= 	6
 attr wallColor					=  "#f0f0f0"
 attr window_var					=	""
-attr roof_color					=	50%: "blue"	else: "red"
+attr roof_color					=	100%: "blue"	else: "red"
 attr roof_tex					=	""
+attr Front_Width				= 	0
+attr Wing						= 	0
 # textures
 window_tile						=	fileRandom("facade/u_f001_t002_Residential_*.jpg")
 wall_tex						= 	"wall/brickwall.jpg"
 dirt_tex						=	fileRandom("general/dirtmap/dirtmap_*.jpg")
+getGreenSpaceTexture	= imageBestRatio("/ESRI.lib/assets/Groundcover/Greencopy/green*.jpg","yx")
+
+
+@StartRule
+Lot -->
+	GreenGround
+	offset(-2, inside)
+	ChineseApartMent
+
+
+GreenGround -->
+	alignScopeToGeometry(zUp,0,longest) 
+	setupProjection(0,scope.yx,'1,'1) projectUV(0)
+	texture(getGreenSpaceTexture)
+	setupProjection(2,scope.yx,'1,'1) projectUV(2) 
+	set(material.dirtmap, dirt_tex)
+
 
 # building 
+HighriseApartment(mass, h) -->
+	set(Front_Width, rand(0.3, 0.8))
+	set(Wing, rand(0.2, 0.3))
+	split(x){'0.33: shapeU(scope.sz*Front_Width,scope.sx*Wing,scope.sx*Wing){ shape: mass(h) } | 
+			 '0.33: shapeU(scope.sz*Front_Width,scope.sx*Wing,scope.sx*Wing){ shape: mass(h) } | 
+			 '0.33: shapeU(scope.sz*Front_Width,scope.sx*Wing,scope.sx*Wing){ shape: mass(h) } } 
+
 ChineseApartMent -->
 	set(window_var, window_tile)
 	set(roof_tex, fileRandom("roof/" + roof_color + "_*.jpg"))
