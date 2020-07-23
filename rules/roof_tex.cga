@@ -22,8 +22,8 @@ attr SlopedRoofTexture	= getSlopedRoofTexture
 #
 
 
-getFlatRoofTexture		= fileRandom("/ESRI.lib/assets/Roofs/Flat_grey/*.jpg")
-getSlopedRoofTexture	= fileRandom("/ESRI.lib/assets/Roofs/Sloped_grey/*.jpg")
+getFlatRoofTexture		= fileRandom("/ESRI.lib/assets/Roofs/Flat_organized/*.jpg")
+getSlopedRoofTexture	= fileRandom("/ESRI.lib/assets/Roofs/Sloped_organized/*.jpg")
 getColor(c) 			= clamp(rand(c-0.02, c+0.02), 0, 1)
 
 

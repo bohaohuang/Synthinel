@@ -35,15 +35,15 @@ attr Type 			= getType
 @Order(2) @Range(0.5,2) 
 attr HeightFactor 	= 1
 @Order(3) @Color @Range("#FF0000", "#00FF00", "#0000FF") @Order(3)
-attr c_res 				= getColorRes
+attr c_res 				= "#FFFFFF"	#getColorRes
 @Order(4) @Color @Range("#FF0000", "#00FF00", "#0000FF") @Order(4)
-attr c_off				= getColorOff
+attr c_off				= "#FFFFFF"	#getColorOff
 @Order(5) @Color @Range("#FF0000", "#00FF00", "#0000FF") @Order(5)
-attr c_apt				= getColorApt
+attr c_apt				= "#FFFFFF"	#getColorApt
 @Order(6) @Color @Range("#FF0000", "#00FF00", "#0000FF") @Order(6)
-attr c_ind				= getColorInd
+attr c_ind				= "#FFFFFF"	#getColorInd
 @Order(7) @Color @Range("#FF0000", "#00FF00", "#0000FF") @Order(7)
-attr c_hig				= getColorHig
+attr c_hig				= "#FFFFFF"	#getColorHig
 
 attr Front_Width		= 0
 attr Wing				= 0
@@ -71,11 +71,11 @@ attr valency 			= 0
 
 # Constants
 const getType =
-	case distanceToCenter < radiusHighriseArea   :  59%: "Industrial" 		 39%: "Office Building"     2%: "Apartment Building" else: "Open Space"     # mainly highrises and commercial
-	case distanceToCenter < radiusCommercialArea :  29%: "Industrial" 		 60%: "Office Building"    10%: "Apartment Building" else: "Open Space"     # mainly offices
-	case distanceToCenter < radiusApartmentArea  :  20%: "Office Building"   76%: "Apartment Building"  3%: "Residential"        else: "Open Space"     # mainly apartments 
-	case distanceToCenter < radiusResidentialArea:   5%: "Office Building"   70%: "Apartment Building" 23%: "Residential"        else: "Open Space"     # mainly residential and apartments
-	else                                         :   1%: "Office Building"    70%: "Apartment Building" 23%: "Residential"        else: "Open Space"     # more or less only residential
+	case distanceToCenter < radiusHighriseArea   :  10%: "Industrial" 10%: "Office Building"     2%: "Apartment Building" 	60%: "Residential"	else: "Open Space"     # mainly highrises and commercial
+	case distanceToCenter < radiusCommercialArea :  10%: "Industrial" 10%: "Office Building"     2%: "Apartment Building" 	60%: "Residential"	else: "Open Space"     # mainly offices
+	case distanceToCenter < radiusApartmentArea  :  10%: "Industrial" 10%: "Office Building"     2%: "Apartment Building"	60%: "Residential"  else: "Open Space"     # mainly apartments 
+	case distanceToCenter < radiusResidentialArea:  10%: "Industrial" 10%: "Office Building"     2%: "Apartment Building"	60%: "Residential"  else: "Open Space"     # mainly residential and apartments
+	else                                         :  10%: "Industrial" 10%: "Office Building"     2%: "Apartment Building"	60%: "Residential"  else: "Open Space"     # more or less only residential
 const factor = 1
 const radiusHighriseArea   	= 0 * factor
 const radiusCommercialArea 	= 100 * factor

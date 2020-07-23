@@ -71,11 +71,11 @@ attr valency 			= 0
 
 # Constants
 const getType =
-	case distanceToCenter < radiusHighriseArea   :  59%: "Industrial" 		 39%: "Office Building"     2%: "Apartment Building" else: "Open Space"     # mainly highrises and commercial
-	case distanceToCenter < radiusCommercialArea :  29%: "Industrial" 		 60%: "Office Building"    10%: "Apartment Building" else: "Open Space"     # mainly offices
-	case distanceToCenter < radiusApartmentArea  :  20%: "Office Building"   76%: "Apartment Building"  3%: "Residential"        else: "Open Space"     # mainly apartments 
-	case distanceToCenter < radiusResidentialArea:   5%: "Office Building"   70%: "Apartment Building" 23%: "Residential"        else: "Open Space"     # mainly residential and apartments
-	else                                         :   1%: "Office Building"    70%: "Apartment Building" 23%: "Residential"        else: "Open Space"     # more or less only residential
+	case distanceToCenter < radiusHighriseArea   :  10%: "Industrial" 10%: "Office Building"     2%: "Apartment Building" 	60%: "Residential"	else: "Open Space"     # mainly highrises and commercial
+	case distanceToCenter < radiusCommercialArea :  10%: "Industrial" 10%: "Office Building"     2%: "Apartment Building" 	60%: "Residential"	else: "Open Space"     # mainly offices
+	case distanceToCenter < radiusApartmentArea  :  10%: "Industrial" 10%: "Office Building"     2%: "Apartment Building"	60%: "Residential"  else: "Open Space"     # mainly apartments 
+	case distanceToCenter < radiusResidentialArea:  10%: "Industrial" 10%: "Office Building"     2%: "Apartment Building"	60%: "Residential"  else: "Open Space"     # mainly residential and apartments
+	else                                         :  10%: "Industrial" 10%: "Office Building"     2%: "Apartment Building"	60%: "Residential"  else: "Open Space"     # more or less only residential                               :   10%: "Industrial" 		 10%: "Office Building"     2%: "Apartment Building"	60%: "Residential"        else: "Open Space"     # more or less only residential
 const factor = 1
 const radiusHighriseArea   	= 0 * factor
 const radiusCommercialArea 	= 100 * factor
